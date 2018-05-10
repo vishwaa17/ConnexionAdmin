@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { LoginService } from '../../../../services/connexionservices/login.service';
+import { UtilsService } from '../../../../services/utils/utils.service';
 
 @Component({
     selector   : 'fuse-login-2',
@@ -12,14 +14,18 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class FuseLogin2Component implements OnInit
 {
+    host: any;
     loginForm: FormGroup;
     loginFormErrors: any;
 
     constructor(
         private fuseConfig: FuseConfigService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private loginService: LoginService,
+        public util: UtilsService
     )
     {
+        this.host = util.getBaseUrl();
         this.fuseConfig.setConfig({
             layout: {
                 navigation: 'none',
@@ -44,6 +50,14 @@ export class FuseLogin2Component implements OnInit
         this.loginForm.valueChanges.subscribe(() => {
             this.onLoginFormValuesChanged();
         });
+    }
+    login(){
+        var email = this.loginForm.value.email;
+        console.log('username', email);
+        var password = this.loginForm.value.password;
+        this.loginService.loginrequest(email,password,this.host).subscribe((data)=>{
+            console.log(data);
+        })
     }
 
     onLoginFormValuesChanged()
