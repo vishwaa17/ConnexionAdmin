@@ -14,6 +14,8 @@ import { fuseConfig } from './fuse-config';
 import { AppComponent } from './app.component';
 import { FuseMainModule } from './main/main.module';
 import { FuseSampleModule } from './main/content/sample/sample.module';
+import { LoginService } from 'app/main/services/connexionservices/login.service';
+import { RegisterService } from './main/services/connexionservices/register.service';
 
 
 const appRoutes: Routes = [
@@ -46,6 +48,9 @@ const appRoutes: Routes = [
         FuseSharedModule,
         FuseMainModule,
         FuseSampleModule
+    ],
+    providers:[
+        LoginService, RegisterService
     ],
     bootstrap: [
         AppComponent

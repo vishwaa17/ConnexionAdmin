@@ -50,6 +50,9 @@ export class FuseRegister2Component implements OnInit
         });
     }
 
+    registerUsers(e){
+      
+    }
     onRegisterFormValuesChanged()
     {
         for ( const field in this.registerFormErrors )
@@ -99,4 +102,5 @@ function confirmPassword(control: AbstractControl)
             passwordsNotMatch: true
         };
     }
+    
 }
